@@ -11,7 +11,7 @@ A fun browser game inspired by Pac-Man, reimagined for the Bitcoin era.
 - Survive waves of central bank ghosts as difficulty rises.
 
 ## Play
-Open `bitcoin-pac.html` in your browser, or try it live here: [link]
+Open `bitcoin-pac.html` in your browser, or try it live here: [[link](https://palurie.github.io/bitcoin-pac/)]
 
 ## Controls
 - Arrow keys / WASD to move
