@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Bitcoin Pac — Eat Dollars (Easy Edition)</title>
 <style>
   :root{
@@ -25,13 +25,41 @@
   .small{font-size:13px;color:#999}
   #overlayTouch{position:relative;max-width:680px;margin:0 auto}
   .directionPad{position:absolute;left:10px;bottom:10px;width:150px;height:150px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-  .pad-btn{position:absolute;width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:22px;pointer-events:auto;user-select:none}
-  .up{top:8px;left:48px}
-  .down{bottom:8px;left:48px}
-  .left{left:8px;top:48px}
-  .right{right:8px;top:48px}
-  footer{font-size:12px;color:#8f8f8f;padding:8px;text-align:center}
-  @media (max-width:600px){canvas{width:100%}.directionPad{transform:scale(0.9)}}
+  .pad-btn {
+  position:absolute;
+  width:70px;   /* bigger touch target */
+  height:70px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+
+  /* mobile zoom fixes */
+  font-size:0;             /* prevents auto-zoom on tap */
+  line-height:0;
+  pointer-events:auto;
+  user-select:none;
+  touch-action:manipulation; /* disables double-tap zoom */
+}
+
+.pad-btn::after {
+  font-size:26px;           /* visible arrow size */
+  line-height:1;
+  content:attr(data-dir-symbol);
+}
+
+.up{top:8px;left:48px}
+.down{bottom:8px;left:48px}
+.left{left:8px;top:48px}
+.right{right:8px;top:48px}
+footer{font-size:12px;color:#8f8f8f;padding:8px;text-align:center}
+
+@media (max-width:600px){
+  canvas{width:100%}
+  .directionPad{transform:scale(0.9)}
+}
 </style>
 </head>
 <body>
@@ -51,10 +79,10 @@
     <canvas id="c" width="680" height="680"></canvas>
     <!-- touch controls -->
     <div class="directionPad" id="pad">
-      <div class="pad-btn up" data-dir="up">▲</div>
-      <div class="pad-btn down" data-dir="down">▼</div>
-      <div class="pad-btn left" data-dir="left">◀</div>
-      <div class="pad-btn right" data-dir="right">▶</div>
+    <div class="pad-btn up" data-dir="up" data-dir-symbol="▲"></div>
+    <div class="pad-btn down" data-dir="down" data-dir-symbol="▼"></div>
+    <div class="pad-btn left" data-dir="left" data-dir-symbol="◀"></div>
+    <div class="pad-btn right" data-dir="right" data-dir-symbol="▶"></div>
     </div>
   </div>
 
@@ -499,4 +527,5 @@ lastTime = performance.now(); requestAnimationFrame(loop);
 </script>
 </body>
 </html>
+
 
