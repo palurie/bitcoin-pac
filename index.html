@@ -485,12 +485,18 @@ restartBtn.addEventListener('click', ()=>{ if(confirm('Restart game?')) startNew
 startNewGame();
 lastTime = performance.now(); requestAnimationFrame(loop);
 
-// Mobile pad visibility
+// Always show d-pad on mobile devices
 (function(){
   const pad=document.getElementById('pad');
-  function upd(){ pad.style.display = (window.innerWidth<880)?'block':'none'; }
-  upd(); window.addEventListener('resize',upd);
+  // Simple detection
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  if(isMobile){
+    pad.style.display = 'block';
+  } else {
+    pad.style.display = 'none';
+  }
 })();
 </script>
 </body>
 </html>
+
